@@ -1,0 +1,38 @@
+
+
+2019/8/10
+
+public ulong HashCode { get { return Name.GetHashCode(); } }
+
+msgdispatcher
+
+2019/8/12
+
+
+svn: E170013: Unable to connect to a repository at URL 'https://github.com/xieliujian/UnityFramework.git'
+svn: E670008: nodename nor servname provided, or not known
+macbook 暂时换回自动ip, 解决问题
+
+flatbuffers_vs_proj
+
+大世界
+Floating Point Fix system 浮点修正系统
+
+原生环境开发可能石像开发阶段暴露出问题
+
+HttpWebRequest
+HttpWebResponse
+
+LogCategory
+    GameLogic
+
+111111111111111111111111111111111
+
+11111111111111111111111111111
+
+11111111111111111111111111111
+
+
+
+
+
