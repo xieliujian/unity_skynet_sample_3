@@ -58,32 +58,42 @@ msgdispatcher.dispatcherFbMsg = function(id, str)
     local msgid = string.unpack("<L", str, 2 + 1);
     local msgoffset = 2 + 8;
 
-    local msgbuf = flatbuffers.binaryArray.New(str);
-
     print(""..msglen);
     print(""..msgid);
-    print(""..#str);
+
     print(str);
 
-    local eventlib = netmsg.getEvents(msgid);
-    if not eventlib then
-        return ;
+    local strbyte = "";
+    for i = 11, msglen do
+       local byte = string.unpack("<B", str, i);
+        print(""..byte)
+        strbyte = strbyte..byte.." ";
     end
+    print(strbyte);
 
-    local msgclass = eventlib.event;
-    if not msgclass then
-        return ;
-    end
 
-    local msg = msgclass.init(msgbuf, msgoffset);
-    if not msg then
-        return ;
-    end
 
-    local data = {};
-    data.id = id;
-    data.msg = msg;
-    netmsg.Brocast(msgid, data);
+    --local msgbuf = flatbuffers.binaryArray.New(str);
+
+    --local eventlib = netmsg.getEvents(msgid);
+    --if not eventlib then
+    --    return ;
+    --end
+    --
+    --local msgclass = eventlib.event;
+    --if not msgclass then
+    --    return ;
+    --end
+    --
+    --local msg = msgclass.init(msgbuf, msgoffset);
+    --if not msg then
+    --    return ;
+    --end
+    --
+    --local data = {};
+    --data.id = id;
+    --data.msg = msg;
+    --netmsg.Brocast(msgid, data);
 end
 
 return msgdispatcher;
