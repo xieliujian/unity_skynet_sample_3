@@ -6,15 +6,16 @@ like Unity Brocast netmsg System in lua.
 local EventLib = require "eventlib"
 
 local netmsg = {}
-
 netmsg.events = {}
 
 function netmsg.getEvents(msgid)
-    
+
     return netmsg.events[msgid];
 end
 
-function netmsg.AddListener(msgid, msg, handler)
+function netmsg.AddListener(msg, handler)
+
+    local msgid = msg.HashID;
 
     if not netmsg.events[msgid] then
         --create the netmsg with name
@@ -33,7 +34,9 @@ function netmsg.Brocast(event, data)
     end
 end
 
-function netmsg.RemoveListener(msgid, msg, handler)
+function netmsg.RemoveListener(msg, handler)
+
+    local msgid = msg.HashID;
 
     if not netmsg.events[msgid] then
         error("remove " .. msgid .. " has no event.")

@@ -8,19 +8,17 @@ local reqlogin = require "ReqLogin";
 ---@type RspLogin
 local rsplogin = require "RspLogin";
 
-local msgid = require "MsgId";
-
 ---@class loginmodel
 loginmodel = {}
 
 loginmodel.register = function()
     print("loginmodel.register")
 
-    msgdispatcher.registerFbMsg(msgid.ReqLogin, reqlogin, loginmodel.reqlogin_cs);
+    msgdispatcher.registerFbMsg(reqlogin, loginmodel.reqlogin_cs);
 end
 
 loginmodel.unRegister = function()
-    msgdispatcher.unRegisterFbMsg(msgid.ReqLogin, reqlogin, loginmodel.reqlogin_cs);
+    msgdispatcher.unRegisterFbMsg(reqlogin, loginmodel.reqlogin_cs);
 end
 
 -- 消息
@@ -31,8 +29,20 @@ loginmodel.reqlogin_cs = function(data)
     local id = data.id;
     local reqlogindata = data.msg;
 
-    print(reqlogindata:Account())
-    --print(reqlogindata:Password())
+    if not reqlogindata then
+        print("11111111111111111111")
+    end
+
+    if not reqlogindata:Account() then
+        print("222222222222222222222")
+    end
+
+    if not reqlogindata:Password() then
+        print("3333333333333333333333")
+    end
+
+    print(reqlogindata:Account());
+    print(reqlogindata:Password());
 
     local builder = msgdispatcher.builder;
     local account = builder:CreateString(reqlogindata:Account().." wow魔兽");
@@ -44,7 +54,7 @@ loginmodel.reqlogin_cs = function(data)
     local orc = rsplogin.End(builder);
     builder:Finish(orc);
 
-    msgdispatcher.sendFbMsg(id, msgid.RspLogin, rsplogin);
+    msgdispatcher.sendFbMsg(id, rsplogin);
 end
 
 return loginmodel;
