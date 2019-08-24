@@ -29,18 +29,6 @@ loginmodel.reqlogin_cs = function(data)
     local id = data.id;
     local reqlogindata = data.msg;
 
-    if not reqlogindata then
-        print("11111111111111111111")
-    end
-
-    if not reqlogindata:Account() then
-        print("222222222222222222222")
-    end
-
-    if not reqlogindata:Password() then
-        print("3333333333333333333333")
-    end
-
     print(reqlogindata:Account());
     print(reqlogindata:Password());
 
