@@ -118,20 +118,10 @@ namespace gtmEngine
 
             gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
             UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
+            UInt16 biglen = Converter.GetBigEndian(lengh);
             buff.WriteShort(lengh);
             buff.WriteUlong(msgid);
             buff.WriteBytes(bytearray);
-
-            ILogSystem.instance.Log(LogCategory.GameLogic, lengh.ToString());
-            ILogSystem.instance.Log(LogCategory.GameLogic, msgid.ToString());
-
-            ILogSystem.instance.Log(LogCategory.GameLogic, "bytearray : " + bytearray.Length);
-            string strbyte = "";
-            for (int i = 0; i < bytearray.Length; i++)
-            {
-                strbyte += bytearray[i].ToString() + " ";
-            }
-            ILogSystem.instance.Log(LogCategory.GameLogic, strbyte);
 
             if (NetManager.instance != null)
             {
