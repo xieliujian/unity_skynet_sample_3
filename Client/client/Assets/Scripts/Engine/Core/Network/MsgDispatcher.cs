@@ -114,7 +114,7 @@ namespace gtmEngine
 
         public override void SendFBMsg(ulong msgid, FlatBufferBuilder builder)
         {
-            byte[] bytearray = builder.DataBuffer.ToFullArray();
+            byte[] bytearray = builder.DataBuffer.ToSizedArray();
 
             gtmInterface.ByteBuffer buff = new gtmInterface.ByteBuffer();
             UInt16 lengh = (UInt16)(bytearray.Length + sizeof(ulong));
