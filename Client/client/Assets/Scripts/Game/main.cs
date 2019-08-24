@@ -57,20 +57,6 @@ namespace gtmGame
             }
         }
 
-        private void SendChatMsg()
-        {
-            var builder = IMsgDispatcher.instance.flatBufferBuilder;
-            var say = builder.CreateString("白日依山尽，黄河入海流。欲穷千里目，更上一层楼。" +
-                "红豆生南国，春来发几枝。愿君多采撷，此物最相思。" +
-                "松下问童子，言师采药去。只在此山中，云深不知处。");
-            fbs.ReqChat.StartReqChat(builder);
-            fbs.ReqChat.AddSay(builder, say);
-            var orc = fbs.ReqChat.EndReqChat(builder);
-            builder.Finish(orc.Value);
-
-            IMsgDispatcher.instance.SendFBMsg(fbs.ReqChat.HashID, builder);
-        }
-
         private void SendLoginMsg()
         {
             var builder = IMsgDispatcher.instance.flatBufferBuilder;
@@ -94,6 +80,20 @@ namespace gtmGame
             builder.Finish(orc.Value);
 
             IMsgDispatcher.instance.SendFBMsg(fbs.ReqLogin.HashID, builder);
+        }
+
+        private void SendChatMsg()
+        {
+            var builder = IMsgDispatcher.instance.flatBufferBuilder;
+            var say = builder.CreateString("白日依山尽，黄河入海流。欲穷千里目，更上一层楼。" +
+                "红豆生南国，春来发几枝。愿君多采撷，此物最相思。" +
+                "松下问童子，言师采药去。只在此山中，云深不知处。");
+            fbs.ReqChat.StartReqChat(builder);
+            fbs.ReqChat.AddSay(builder, say);
+            var orc = fbs.ReqChat.EndReqChat(builder);
+            builder.Finish(orc.Value);
+
+            IMsgDispatcher.instance.SendFBMsg(fbs.ReqChat.HashID, builder);
         }
 
         private void SendTestMsg()
