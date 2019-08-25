@@ -89,6 +89,11 @@ namespace lua {
 
       code += "local " + NormalizedMetaName(struct_def) + " = {} -- the class metatable\n";
       code += "\n";
+
+      char buf[32];
+      std::string fullname = struct_def.name;
+      snprintf(buf, 32, "0x%016llX", flatbuffers::HashFnv1<uint64_t>(fullname.c_str()));
+      code += NormalizedName(struct_def) + ".HashID = " + std::string(buf) + ";\n";
     }
 
     // Begin enum code with a class declaration.

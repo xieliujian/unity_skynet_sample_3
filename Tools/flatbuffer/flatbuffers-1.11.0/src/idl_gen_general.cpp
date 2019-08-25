@@ -836,6 +836,12 @@ class GeneralGenerator : public BaseGenerator {
       code += lang_.open_curly;
     }
 
+    // Ôö¼Ómsgid
+    char buf[32];
+    std::string fullname = struct_def.name;
+    snprintf(buf, 32, "0x%016llX", flatbuffers::HashFnv1<uint64_t>(fullname.c_str()));
+    code += "  public const ulong HashID = " + std::string(buf) + ";\n";
+
     if (!struct_def.fixed) {
       // Generate a special accessor for the table that when used as the root
       // of a FlatBuffer
